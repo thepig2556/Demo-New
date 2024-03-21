@@ -36,13 +36,14 @@ import java.util.List;
 public class RetrieveDataActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
 ListView lvManga;
 List<Model> mangaList;
-DatabaseReference mangaDBRef;
+DatabaseReference mangaDBRef, dbRef;
 
     Spinner spinner;
     String item;
-    Model model;
-    String[] genre ={"Choose genre","Comedy","Slice of life","Drama","Horror"};
-
+    ValueEventListener listener;
+    ArrayList<String> list;
+    ArrayAdapter<String> adapter;
+    long maxid=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +53,9 @@ DatabaseReference mangaDBRef;
         mangaList = new ArrayList<>();
 
         mangaDBRef = FirebaseDatabase.getInstance().getReference("Data");
+
+        dbRef = FirebaseDatabase.getInstance().getReference("Genre Data");
+        
         mangaDBRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -95,10 +99,10 @@ DatabaseReference mangaDBRef;
 
         //DROPDOWN MENU
         spinner=mDialogView.findViewById(R.id.genreUpdate);
-        spinner.setOnItemSelectedListener(this);
-        ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item,genre);
-        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(arrayAdapter);
+        list=new ArrayList<String>();
+        adapter=new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item,list);
+        spinner.setAdapter(adapter);
+        fechData();
 
 
 
@@ -111,23 +115,17 @@ DatabaseReference mangaDBRef;
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (item=="Choose genre")
-                {
-                    Toast.makeText(RetrieveDataActivity.this, "Please select genre for this manga", Toast.LENGTH_SHORT).show();
-                }
-                else {
                     String newName = nameUpdate.getText().toString();
                     String newImage = imageUpdate.getText().toString();
                     String newAuthor = authorUpdate.getText().toString();
                     String newView = viewUpdate.getText().toString();
                     updateData(id,newName,newImage,newAuthor,newView);
-                    mangaDBRef.child("/"+id+"/genre").setValue(item);
+                    mangaDBRef.child("/"+id+"/genre").setValue(spinner.getSelectedItem().toString());
                     Toast.makeText(RetrieveDataActivity.this, "Record Update", Toast.LENGTH_SHORT).show();
                     nameUpdate.setText("");
                     imageUpdate.setText("");
                     authorUpdate.setText("");
                     viewUpdate.setText("");
-                }
             }
         });
         btnDelete.setOnClickListener(new View.OnClickListener() {
@@ -137,6 +135,25 @@ DatabaseReference mangaDBRef;
             }
         });
     }
+
+    private void fechData() {
+        listener=dbRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot mydata : snapshot.getChildren() )
+                {
+                    list.add(mydata.getValue().toString());
+                }
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
     private void showToast(String message){
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
@@ -188,7 +205,6 @@ DatabaseReference mangaDBRef;
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        item=spinner.getSelectedItem().toString();
     }
 
     @Override

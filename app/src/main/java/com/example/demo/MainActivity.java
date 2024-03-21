@@ -264,6 +264,25 @@ holder.mview.setOnClickListener(new View.OnClickListener() {
                     }
                 }
             }
+        if(item.getItemId()==R.id.addGenre){
+            {
+                if(user!=null)
+                {
+                    String s = "thepig6704@gmail.com";
+                    if (user.getEmail().equals(s))
+                    {
+                        Intent intent = new Intent(this, AddGenreActivity.class);
+                        startActivity(intent);
+                    }
+                    else {
+                        Toast.makeText(this, "You must login to admin account to use this system", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                else {
+                    Toast.makeText(this, "You must login to admin account to use this system", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
         if(item.getItemId()==R.id.logout){
             Intent intent = new Intent(MainActivity.this, SecondActivity.class);
             startActivity(intent);

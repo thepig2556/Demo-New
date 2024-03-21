@@ -26,15 +26,17 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+
 public class InsertAcitivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     EditText nameAdd,authorAdd,imgAdd, viewAdd;
     Button btnAdd, btnBack;
-    DatabaseReference mangaDbRef;
-    FirebaseAuth auth;
-    FirebaseUser user;
+    DatabaseReference mangaDbRef, dbRef;
     Spinner spinner;
     String item;
-    String[] genre ={"Choose genre","Comedy","Slice of life","Drama","Horror"};
+    ValueEventListener listener;
+    ArrayList<String> list;
+    ArrayAdapter<String> adapter;
     long maxid=0; //Biến đặt trên firebase
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,10 +44,13 @@ public class InsertAcitivity extends AppCompatActivity implements AdapterView.On
         setContentView(R.layout.activity_insert_acitivity);
 
         spinner=findViewById(R.id.spinnerAdd);
-        spinner.setOnItemSelectedListener(this);
-        ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item,genre);
-        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(arrayAdapter);
+        list=new ArrayList<String>();
+        adapter=new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item,list);
+        spinner.setAdapter(adapter);
+//        spinner.setOnItemSelectedListener(this);
+//        ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item,genre);
+//        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        spinner.setAdapter(arrayAdapter);
 
         nameAdd = findViewById(R.id.nameAdd);
         imgAdd = findViewById(R.id.imgAdd);
@@ -53,27 +58,14 @@ public class InsertAcitivity extends AppCompatActivity implements AdapterView.On
         viewAdd = findViewById(R.id.viewAdd);
         btnAdd = findViewById(R.id.btnAdd);
         btnBack = findViewById(R.id.btnBack);
-        //ko cho vao khi chua dang nhap
 
-        auth=FirebaseAuth.getInstance();
-        user = auth.getCurrentUser();
-//        if(user==null)
-//        {
-//            Intent intent = new Intent(InsertAcitivity.this, MainActivity.class);
-//            startActivity(intent);
-//            Toast.makeText(this, "You must login to use this system", Toast.LENGTH_SHORT).show();
-//        }
-//        if (user.getEmail()==s){
-//            Toast.makeText(this, "WELCOME BACK", Toast.LENGTH_SHORT).show();
-//        }
-//        else{
-//            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-//            startActivity(intent);
-//            Toast.makeText(this, "You must login with admin account to continue", Toast.LENGTH_SHORT).show();
-//        }
+        dbRef = FirebaseDatabase.getInstance().getReference("Genre Data");
+        //load genre
+        fetchData();
 
         //truy xuất dữ liệu đến KEY "Data"
         mangaDbRef = FirebaseDatabase.getInstance().getReference("Data");
+
         mangaDbRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -104,12 +96,26 @@ public class InsertAcitivity extends AppCompatActivity implements AdapterView.On
         });
     }
 
+    private void fetchData() {
+        listener=dbRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot mydata : snapshot.getChildren() )
+                {
+                    list.add(mydata.getValue().toString());
+                }
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+
     private void insertManga() {
-        if(item=="Choose genre")
-        {
-            Toast.makeText(this, "Please select genre for this manga", Toast.LENGTH_SHORT).show();
-        }
-        else{
             String name = nameAdd.getText().toString();
             String img = imgAdd.getText().toString();
             String author = authorAdd.getText().toString();
@@ -117,19 +123,17 @@ public class InsertAcitivity extends AppCompatActivity implements AdapterView.On
             String view = viewAdd.getText().toString();
             Model manga = new Model(id,name,img,author,view);
             assert id != null;
-            manga.setGenre(item);
+            manga.setGenre(spinner.getSelectedItem().toString());
             mangaDbRef.child(id).setValue(manga);
             Toast.makeText(this, "Insert Succesful", Toast.LENGTH_SHORT).show();
             nameAdd.setText("");
             imgAdd.setText("");
             authorAdd.setText("");
             viewAdd.setText("");
-        }
     }
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        item=spinner.getSelectedItem().toString();
     }
 
     @Override

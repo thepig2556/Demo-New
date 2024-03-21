@@ -14,4 +14,8 @@
         app:showAsAction="always"
         android:title="User"
         android:icon="@drawable/icaccount"/>
+    <item
+        android:id="@+id/addGenre"
+        app:showAsAction="never"
+        android:title="Add Genre" />
 </menu>
