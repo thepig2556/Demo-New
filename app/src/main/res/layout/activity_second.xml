@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/acheron3"
+    tools:context=".SecondActivity">
+
+
+    <ImageView
+        android:id="@+id/profilepic"
+        android:layout_width="194dp"
+        android:layout_height="190dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/button_shape"
+        android:padding="10dp"
+        android:src="@drawable/baseline_manage_accounts_24" />
+    <Button
+        android:layout_width="110dp"
+        android:text="Update profile pic"
+        android:backgroundTint="@color/red"
+        android:background="@drawable/button_shape2"
+        android:id="@+id/btnChangeProfilePic"
+        android:textSize="12sp"
+        android:layout_gravity="center"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:text="WELCOME"
+        android:textSize="30sp"
+        android:textColor="#ffffff"
+        android:textStyle="bold"
+        android:layout_marginTop="30dp"
+        android:layout_gravity="center"
+        android:layout_height="wrap_content"/>
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:background="@drawable/button_shape2"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center"
+        android:id="@+id/tvUserEmail"
+        android:hint="UserEmail"
+        android:padding="10dp"
+        android:textColor="@color/black"
+        android:textStyle="bold"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center">
+        <Button
+            android:layout_width="150dp"
+            android:textSize="20sp"
+            android:id="@+id/btnSignout"
+            android:text="Signout"
+            android:background="@drawable/edit_text_background"
+            android:backgroundTint="@color/red"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="30dp"/>
+        <Button
+            android:layout_width="150dp"
+            android:text="Update Password"
+            android:backgroundTint="@color/red"
+            android:background="@drawable/edit_text_background"
+            android:id="@+id/btnChangePassword"
+            android:textSize="20sp"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+    <Button
+        android:layout_width="150dp"
+        android:layout_marginTop="10dp"
+        android:text="Back"
+        android:background="@drawable/edit_text_background"
+        android:id="@+id/btnBack"
+        android:layout_gravity="center"
+        android:textSize="20sp"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>

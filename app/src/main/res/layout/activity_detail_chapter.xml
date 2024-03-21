@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".listchap.DetailChapterActivity">
+    <ImageView
+        android:id="@+id/imgAnh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        ></ImageView>
+    <ImageView
+        android:onClick="left"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:padding="10dp"
+        android:src="@drawable/lefts2"
+        android:layout_centerVertical="true"
+        ></ImageView>
+    <ImageView
+        android:onClick="right"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:padding="10dp"
+        android:src="@drawable/rights"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        ></ImageView>
+
+</RelativeLayout>

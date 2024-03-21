@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:padding="5dp"
+    android:layout_height="70dp"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tvSochap"
+        android:text="Chap 1"
+        android:textColor="#000"
+        android:padding="3dp"
+        android:textSize="25dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold">
+
+    </TextView>
+
+    <TextView
+        android:id="@+id/tvNgaychap"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="06-9-2023"
+        android:textColor="#636262"
+        android:textSize="13sp">
+
+    </TextView>
+
+</LinearLayout>
