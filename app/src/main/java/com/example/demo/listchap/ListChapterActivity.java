@@ -28,7 +28,7 @@ public class ListChapterActivity extends AppCompatActivity {
     Model model;
     ImageButton add_commentsbtn;
 
-TextView tvTenMG;
+TextView tvTenMG, txtGenre;
 ImageView img_detail;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +56,8 @@ ImageView img_detail;
         String title=model.getTitle();
         getSupportActionBar().setTitle(title);
         tvTenMG=findViewById(R.id.txtTenMG);
+        txtGenre = findViewById(R.id.txtGenre);
+        txtGenre.setText(model.getGenre());
 //tvTenMG.setText(getTitle());
 
         img_detail=findViewById(R.id.img_detail);

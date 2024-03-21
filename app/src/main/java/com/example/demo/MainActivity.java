@@ -136,9 +136,6 @@ public class MainActivity extends AppCompatActivity {
                 {
                     showData(s.toString());
                 }
-                else{
-                    showData("");
-                }
             }
         });
     }
@@ -153,32 +150,30 @@ public class MainActivity extends AppCompatActivity {
         mangasRef.child("luotxem").setValue(newView);
     }
 
-
+//public void showData(String data)
     private void showData(String data) {
         Query query = mDatabaseReference.orderByChild("title").startAt(data).endAt(data+"\uf8ff");
-//        Query quary = mDatabaseReference.orderByChild("author").startAt(data).endAt(data+"\uf8ff");
         options = new FirebaseRecyclerOptions.Builder<Model>().setQuery(query,Model.class).build();
-//        options = new FirebaseRecyclerOptions.Builder<Model>().setQuery(quary,Model.class).build();
         firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Model, ViewHolder>(options) {
             @Override
             protected void onBindViewHolder(@NonNull ViewHolder holder,final int position, @NonNull Model model) {
                 holder.setDetails(getApplicationContext(),model.getTitle(), model.getImage(), model.getAuthor(), model.getLuotxem());
 //                Click chapter
                 //Set on Click Item List Chapter
-holder.mview.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-        Intent intent=new Intent( MainActivity.this,ListChapterActivity.class);
-        Bundle bundle=new Bundle();
-        bundle.putSerializable("key",model);
-        intent.putExtras(bundle);
-        String s= model.getId();
-        onMangaClicked(s);
-        startActivity(intent);
-        //
+                holder.mview.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent=new Intent( MainActivity.this,ListChapterActivity.class);
+                        Bundle bundle=new Bundle();
+                        bundle.putSerializable("key",model);
+                        intent.putExtras(bundle);
+                        String s= model.getId();
+                        onMangaClicked(s);
+                        startActivity(intent);
+                        //
 //        dữ iệu ảo list chapter
-    }
-});
+                    }
+                });
             }
 
             @NonNull
@@ -189,7 +184,7 @@ holder.mview.setOnClickListener(new View.OnClickListener() {
                 viewHolder.setOnClickListener(new ViewHolder.ClickListener() {
                     @Override
                     public void onItemClick(View view, int position) {
-         //               Toast.makeText(MainActivity.this,"Hello",Toast.LENGTH_SHORT).show();
+                        //               Toast.makeText(MainActivity.this,"Hello",Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
@@ -286,6 +281,541 @@ holder.mview.setOnClickListener(new View.OnClickListener() {
         if(item.getItemId()==R.id.logout){
             Intent intent = new Intent(MainActivity.this, SecondActivity.class);
             startActivity(intent);
+        }
+
+
+        if (item.getItemId()==R.id.genreAll)
+        {
+            showData("");
+        }
+
+        if(item.getItemId()==R.id.genreRomance)
+        {
+            options = new FirebaseRecyclerOptions.Builder<Model>().setQuery(mDatabaseReference.orderByChild("genre").equalTo("Romance"),Model.class).build();
+            firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Model, ViewHolder>(options) {
+                @Override
+                protected void onBindViewHolder(@NonNull ViewHolder holder,final int position, @NonNull Model model) {
+                    holder.setDetails(getApplicationContext(),model.getTitle(), model.getImage(), model.getAuthor(), model.getLuotxem());
+//                Click chapter
+                    //Set on Click Item List Chapter
+                    holder.mview.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent=new Intent( MainActivity.this,ListChapterActivity.class);
+                            Bundle bundle=new Bundle();
+                            bundle.putSerializable("key",model);
+                            intent.putExtras(bundle);
+                            String s= model.getId();
+                            onMangaClicked(s);
+                            startActivity(intent);
+                            //
+//        dữ iệu ảo list chapter
+                        }
+                    });
+                }
+
+                @NonNull
+                @Override
+                public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                    View itemView= LayoutInflater.from(parent.getContext()).inflate(R.layout.row,parent,false);
+                    ViewHolder viewHolder=new ViewHolder(itemView);
+                    viewHolder.setOnClickListener(new ViewHolder.ClickListener() {
+                        @Override
+                        public void onItemClick(View view, int position) {
+                            //               Toast.makeText(MainActivity.this,"Hello",Toast.LENGTH_SHORT).show();
+                        }
+
+                        @Override
+                        public void onItemLongClick(View view, int position) {
+//                        Toast.makeText(MainActivity.this,"Hello",Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                    return viewHolder;
+                }
+            };
+            mRecyclerView.setLayoutManager(mLinearLayoutManager);
+            firebaseRecyclerAdapter.startListening();
+            mRecyclerView.setAdapter(firebaseRecyclerAdapter);
+        }
+        if(item.getItemId()==R.id.genreDetective)
+        {
+            options = new FirebaseRecyclerOptions.Builder<Model>().setQuery(mDatabaseReference.orderByChild("genre").equalTo("Detective"),Model.class).build();
+            firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Model, ViewHolder>(options) {
+                @Override
+                protected void onBindViewHolder(@NonNull ViewHolder holder,final int position, @NonNull Model model) {
+                    holder.setDetails(getApplicationContext(),model.getTitle(), model.getImage(), model.getAuthor(), model.getLuotxem());
+//                Click chapter
+                    //Set on Click Item List Chapter
+                    holder.mview.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent=new Intent( MainActivity.this,ListChapterActivity.class);
+                            Bundle bundle=new Bundle();
+                            bundle.putSerializable("key",model);
+                            intent.putExtras(bundle);
+                            String s= model.getId();
+                            onMangaClicked(s);
+                            startActivity(intent);
+                            //
+//        dữ iệu ảo list chapter
+                        }
+                    });
+                }
+
+                @NonNull
+                @Override
+                public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                    View itemView= LayoutInflater.from(parent.getContext()).inflate(R.layout.row,parent,false);
+                    ViewHolder viewHolder=new ViewHolder(itemView);
+                    viewHolder.setOnClickListener(new ViewHolder.ClickListener() {
+                        @Override
+                        public void onItemClick(View view, int position) {
+                            //               Toast.makeText(MainActivity.this,"Hello",Toast.LENGTH_SHORT).show();
+                        }
+
+                        @Override
+                        public void onItemLongClick(View view, int position) {
+//                        Toast.makeText(MainActivity.this,"Hello",Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                    return viewHolder;
+                }
+            };
+            mRecyclerView.setLayoutManager(mLinearLayoutManager);
+            firebaseRecyclerAdapter.startListening();
+            mRecyclerView.setAdapter(firebaseRecyclerAdapter);
+        }
+        if(item.getItemId()==R.id.genreAdventure)
+        {
+            options = new FirebaseRecyclerOptions.Builder<Model>().setQuery(mDatabaseReference.orderByChild("genre").equalTo("Adventure"),Model.class).build();
+            firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Model, ViewHolder>(options) {
+                @Override
+                protected void onBindViewHolder(@NonNull ViewHolder holder,final int position, @NonNull Model model) {
+                    holder.setDetails(getApplicationContext(),model.getTitle(), model.getImage(), model.getAuthor(), model.getLuotxem());
+//                Click chapter
+                    //Set on Click Item List Chapter
+                    holder.mview.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent=new Intent( MainActivity.this,ListChapterActivity.class);
+                            Bundle bundle=new Bundle();
+                            bundle.putSerializable("key",model);
+                            intent.putExtras(bundle);
+                            String s= model.getId();
+                            onMangaClicked(s);
+                            startActivity(intent);
+                            //
+//        dữ iệu ảo list chapter
+                        }
+                    });
+                }
+
+                @NonNull
+                @Override
+                public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                    View itemView= LayoutInflater.from(parent.getContext()).inflate(R.layout.row,parent,false);
+                    ViewHolder viewHolder=new ViewHolder(itemView);
+                    viewHolder.setOnClickListener(new ViewHolder.ClickListener() {
+                        @Override
+                        public void onItemClick(View view, int position) {
+                            //               Toast.makeText(MainActivity.this,"Hello",Toast.LENGTH_SHORT).show();
+                        }
+
+                        @Override
+                        public void onItemLongClick(View view, int position) {
+//                        Toast.makeText(MainActivity.this,"Hello",Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                    return viewHolder;
+                }
+            };
+            mRecyclerView.setLayoutManager(mLinearLayoutManager);
+            firebaseRecyclerAdapter.startListening();
+            mRecyclerView.setAdapter(firebaseRecyclerAdapter);
+        }
+        if(item.getItemId()==R.id.genreAction)
+        {
+            options = new FirebaseRecyclerOptions.Builder<Model>().setQuery(mDatabaseReference.orderByChild("genre").equalTo("Action"),Model.class).build();
+            firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Model, ViewHolder>(options) {
+                @Override
+                protected void onBindViewHolder(@NonNull ViewHolder holder,final int position, @NonNull Model model) {
+                    holder.setDetails(getApplicationContext(),model.getTitle(), model.getImage(), model.getAuthor(), model.getLuotxem());
+//                Click chapter
+                    //Set on Click Item List Chapter
+                    holder.mview.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent=new Intent( MainActivity.this,ListChapterActivity.class);
+                            Bundle bundle=new Bundle();
+                            bundle.putSerializable("key",model);
+                            intent.putExtras(bundle);
+                            String s= model.getId();
+                            onMangaClicked(s);
+                            startActivity(intent);
+                            //
+//        dữ iệu ảo list chapter
+                        }
+                    });
+                }
+
+                @NonNull
+                @Override
+                public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                    View itemView= LayoutInflater.from(parent.getContext()).inflate(R.layout.row,parent,false);
+                    ViewHolder viewHolder=new ViewHolder(itemView);
+                    viewHolder.setOnClickListener(new ViewHolder.ClickListener() {
+                        @Override
+                        public void onItemClick(View view, int position) {
+                            //               Toast.makeText(MainActivity.this,"Hello",Toast.LENGTH_SHORT).show();
+                        }
+
+                        @Override
+                        public void onItemLongClick(View view, int position) {
+//                        Toast.makeText(MainActivity.this,"Hello",Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                    return viewHolder;
+                }
+            };
+            mRecyclerView.setLayoutManager(mLinearLayoutManager);
+            firebaseRecyclerAdapter.startListening();
+            mRecyclerView.setAdapter(firebaseRecyclerAdapter);
+        }
+        if(item.getItemId()==R.id.genrePsychological)
+        {
+            options = new FirebaseRecyclerOptions.Builder<Model>().setQuery(mDatabaseReference.orderByChild("genre").equalTo("Psychological"),Model.class).build();
+            firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Model, ViewHolder>(options) {
+                @Override
+                protected void onBindViewHolder(@NonNull ViewHolder holder,final int position, @NonNull Model model) {
+                    holder.setDetails(getApplicationContext(),model.getTitle(), model.getImage(), model.getAuthor(), model.getLuotxem());
+//                Click chapter
+                    //Set on Click Item List Chapter
+                    holder.mview.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent=new Intent( MainActivity.this,ListChapterActivity.class);
+                            Bundle bundle=new Bundle();
+                            bundle.putSerializable("key",model);
+                            intent.putExtras(bundle);
+                            String s= model.getId();
+                            onMangaClicked(s);
+                            startActivity(intent);
+                            //
+//        dữ iệu ảo list chapter
+                        }
+                    });
+                }
+
+                @NonNull
+                @Override
+                public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                    View itemView= LayoutInflater.from(parent.getContext()).inflate(R.layout.row,parent,false);
+                    ViewHolder viewHolder=new ViewHolder(itemView);
+                    viewHolder.setOnClickListener(new ViewHolder.ClickListener() {
+                        @Override
+                        public void onItemClick(View view, int position) {
+                            //               Toast.makeText(MainActivity.this,"Hello",Toast.LENGTH_SHORT).show();
+                        }
+
+                        @Override
+                        public void onItemLongClick(View view, int position) {
+//                        Toast.makeText(MainActivity.this,"Hello",Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                    return viewHolder;
+                }
+            };
+            mRecyclerView.setLayoutManager(mLinearLayoutManager);
+            firebaseRecyclerAdapter.startListening();
+            mRecyclerView.setAdapter(firebaseRecyclerAdapter);
+        }
+        if(item.getItemId()==R.id.genreComedy)
+        {
+            options = new FirebaseRecyclerOptions.Builder<Model>().setQuery(mDatabaseReference.orderByChild("genre").equalTo("Comedy"),Model.class).build();
+            firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Model, ViewHolder>(options) {
+                @Override
+                protected void onBindViewHolder(@NonNull ViewHolder holder,final int position, @NonNull Model model) {
+                    holder.setDetails(getApplicationContext(),model.getTitle(), model.getImage(), model.getAuthor(), model.getLuotxem());
+//                Click chapter
+                    //Set on Click Item List Chapter
+                    holder.mview.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent=new Intent( MainActivity.this,ListChapterActivity.class);
+                            Bundle bundle=new Bundle();
+                            bundle.putSerializable("key",model);
+                            intent.putExtras(bundle);
+                            String s= model.getId();
+                            onMangaClicked(s);
+                            startActivity(intent);
+                            //
+//        dữ iệu ảo list chapter
+                        }
+                    });
+                }
+
+                @NonNull
+                @Override
+                public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                    View itemView= LayoutInflater.from(parent.getContext()).inflate(R.layout.row,parent,false);
+                    ViewHolder viewHolder=new ViewHolder(itemView);
+                    viewHolder.setOnClickListener(new ViewHolder.ClickListener() {
+                        @Override
+                        public void onItemClick(View view, int position) {
+                            //               Toast.makeText(MainActivity.this,"Hello",Toast.LENGTH_SHORT).show();
+                        }
+
+                        @Override
+                        public void onItemLongClick(View view, int position) {
+//                        Toast.makeText(MainActivity.this,"Hello",Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                    return viewHolder;
+                }
+            };
+            mRecyclerView.setLayoutManager(mLinearLayoutManager);
+            firebaseRecyclerAdapter.startListening();
+            mRecyclerView.setAdapter(firebaseRecyclerAdapter);
+        }
+        if(item.getItemId()==R.id.genreFantasy)
+        {
+            options = new FirebaseRecyclerOptions.Builder<Model>().setQuery(mDatabaseReference.orderByChild("genre").equalTo("Fantasy"),Model.class).build();
+            firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Model, ViewHolder>(options) {
+                @Override
+                protected void onBindViewHolder(@NonNull ViewHolder holder,final int position, @NonNull Model model) {
+                    holder.setDetails(getApplicationContext(),model.getTitle(), model.getImage(), model.getAuthor(), model.getLuotxem());
+//                Click chapter
+                    //Set on Click Item List Chapter
+                    holder.mview.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent=new Intent( MainActivity.this,ListChapterActivity.class);
+                            Bundle bundle=new Bundle();
+                            bundle.putSerializable("key",model);
+                            intent.putExtras(bundle);
+                            String s= model.getId();
+                            onMangaClicked(s);
+                            startActivity(intent);
+                            //
+//        dữ iệu ảo list chapter
+                        }
+                    });
+                }
+
+                @NonNull
+                @Override
+                public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                    View itemView= LayoutInflater.from(parent.getContext()).inflate(R.layout.row,parent,false);
+                    ViewHolder viewHolder=new ViewHolder(itemView);
+                    viewHolder.setOnClickListener(new ViewHolder.ClickListener() {
+                        @Override
+                        public void onItemClick(View view, int position) {
+                            //               Toast.makeText(MainActivity.this,"Hello",Toast.LENGTH_SHORT).show();
+                        }
+
+                        @Override
+                        public void onItemLongClick(View view, int position) {
+//                        Toast.makeText(MainActivity.this,"Hello",Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                    return viewHolder;
+                }
+            };
+            mRecyclerView.setLayoutManager(mLinearLayoutManager);
+            firebaseRecyclerAdapter.startListening();
+            mRecyclerView.setAdapter(firebaseRecyclerAdapter);
+        }
+        if(item.getItemId()==R.id.genreShounen)
+        {
+            options = new FirebaseRecyclerOptions.Builder<Model>().setQuery(mDatabaseReference.orderByChild("genre").equalTo("Shounen"),Model.class).build();
+            firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Model, ViewHolder>(options) {
+                @Override
+                protected void onBindViewHolder(@NonNull ViewHolder holder,final int position, @NonNull Model model) {
+                    holder.setDetails(getApplicationContext(),model.getTitle(), model.getImage(), model.getAuthor(), model.getLuotxem());
+//                Click chapter
+                    //Set on Click Item List Chapter
+                    holder.mview.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent=new Intent( MainActivity.this,ListChapterActivity.class);
+                            Bundle bundle=new Bundle();
+                            bundle.putSerializable("key",model);
+                            intent.putExtras(bundle);
+                            String s= model.getId();
+                            onMangaClicked(s);
+                            startActivity(intent);
+                            //
+//        dữ iệu ảo list chapter
+                        }
+                    });
+                }
+
+                @NonNull
+                @Override
+                public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                    View itemView= LayoutInflater.from(parent.getContext()).inflate(R.layout.row,parent,false);
+                    ViewHolder viewHolder=new ViewHolder(itemView);
+                    viewHolder.setOnClickListener(new ViewHolder.ClickListener() {
+                        @Override
+                        public void onItemClick(View view, int position) {
+                            //               Toast.makeText(MainActivity.this,"Hello",Toast.LENGTH_SHORT).show();
+                        }
+
+                        @Override
+                        public void onItemLongClick(View view, int position) {
+//                        Toast.makeText(MainActivity.this,"Hello",Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                    return viewHolder;
+                }
+            };
+            mRecyclerView.setLayoutManager(mLinearLayoutManager);
+            firebaseRecyclerAdapter.startListening();
+            mRecyclerView.setAdapter(firebaseRecyclerAdapter);
+        }
+        if(item.getItemId()==R.id.genreDrama)
+        {
+            options = new FirebaseRecyclerOptions.Builder<Model>().setQuery(mDatabaseReference.orderByChild("genre").equalTo("Drama"),Model.class).build();
+            firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Model, ViewHolder>(options) {
+                @Override
+                protected void onBindViewHolder(@NonNull ViewHolder holder,final int position, @NonNull Model model) {
+                    holder.setDetails(getApplicationContext(),model.getTitle(), model.getImage(), model.getAuthor(), model.getLuotxem());
+//                Click chapter
+                    //Set on Click Item List Chapter
+                    holder.mview.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent=new Intent( MainActivity.this,ListChapterActivity.class);
+                            Bundle bundle=new Bundle();
+                            bundle.putSerializable("key",model);
+                            intent.putExtras(bundle);
+                            String s= model.getId();
+                            onMangaClicked(s);
+                            startActivity(intent);
+                            //
+//        dữ iệu ảo list chapter
+                        }
+                    });
+                }
+
+                @NonNull
+                @Override
+                public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                    View itemView= LayoutInflater.from(parent.getContext()).inflate(R.layout.row,parent,false);
+                    ViewHolder viewHolder=new ViewHolder(itemView);
+                    viewHolder.setOnClickListener(new ViewHolder.ClickListener() {
+                        @Override
+                        public void onItemClick(View view, int position) {
+                            //               Toast.makeText(MainActivity.this,"Hello",Toast.LENGTH_SHORT).show();
+                        }
+
+                        @Override
+                        public void onItemLongClick(View view, int position) {
+//                        Toast.makeText(MainActivity.this,"Hello",Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                    return viewHolder;
+                }
+            };
+            mRecyclerView.setLayoutManager(mLinearLayoutManager);
+            firebaseRecyclerAdapter.startListening();
+            mRecyclerView.setAdapter(firebaseRecyclerAdapter);
+        }
+        if(item.getItemId()==R.id.genreHorror)
+        {
+            options = new FirebaseRecyclerOptions.Builder<Model>().setQuery(mDatabaseReference.orderByChild("genre").equalTo("Horror"),Model.class).build();
+            firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Model, ViewHolder>(options) {
+                @Override
+                protected void onBindViewHolder(@NonNull ViewHolder holder,final int position, @NonNull Model model) {
+                    holder.setDetails(getApplicationContext(),model.getTitle(), model.getImage(), model.getAuthor(), model.getLuotxem());
+//                Click chapter
+                    //Set on Click Item List Chapter
+                    holder.mview.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent=new Intent( MainActivity.this,ListChapterActivity.class);
+                            Bundle bundle=new Bundle();
+                            bundle.putSerializable("key",model);
+                            intent.putExtras(bundle);
+                            String s= model.getId();
+                            onMangaClicked(s);
+                            startActivity(intent);
+                            //
+//        dữ iệu ảo list chapter
+                        }
+                    });
+                }
+
+                @NonNull
+                @Override
+                public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                    View itemView= LayoutInflater.from(parent.getContext()).inflate(R.layout.row,parent,false);
+                    ViewHolder viewHolder=new ViewHolder(itemView);
+                    viewHolder.setOnClickListener(new ViewHolder.ClickListener() {
+                        @Override
+                        public void onItemClick(View view, int position) {
+                            //               Toast.makeText(MainActivity.this,"Hello",Toast.LENGTH_SHORT).show();
+                        }
+
+                        @Override
+                        public void onItemLongClick(View view, int position) {
+//                        Toast.makeText(MainActivity.this,"Hello",Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                    return viewHolder;
+                }
+            };
+            mRecyclerView.setLayoutManager(mLinearLayoutManager);
+            firebaseRecyclerAdapter.startListening();
+            mRecyclerView.setAdapter(firebaseRecyclerAdapter);
+        }
+        if(item.getItemId()==R.id.genreScience)
+        {
+            options = new FirebaseRecyclerOptions.Builder<Model>().setQuery(mDatabaseReference.orderByChild("genre").equalTo("Science"),Model.class).build();
+            firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Model, ViewHolder>(options) {
+                @Override
+                protected void onBindViewHolder(@NonNull ViewHolder holder,final int position, @NonNull Model model) {
+                    holder.setDetails(getApplicationContext(),model.getTitle(), model.getImage(), model.getAuthor(), model.getLuotxem());
+//                Click chapter
+                    //Set on Click Item List Chapter
+                    holder.mview.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent=new Intent( MainActivity.this,ListChapterActivity.class);
+                            Bundle bundle=new Bundle();
+                            bundle.putSerializable("key",model);
+                            intent.putExtras(bundle);
+                            String s= model.getId();
+                            onMangaClicked(s);
+                            startActivity(intent);
+                            //
+//        dữ iệu ảo list chapter
+                        }
+                    });
+                }
+
+                @NonNull
+                @Override
+                public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                    View itemView= LayoutInflater.from(parent.getContext()).inflate(R.layout.row,parent,false);
+                    ViewHolder viewHolder=new ViewHolder(itemView);
+                    viewHolder.setOnClickListener(new ViewHolder.ClickListener() {
+                        @Override
+                        public void onItemClick(View view, int position) {
+                            //               Toast.makeText(MainActivity.this,"Hello",Toast.LENGTH_SHORT).show();
+                        }
+
+                        @Override
+                        public void onItemLongClick(View view, int position) {
+//                        Toast.makeText(MainActivity.this,"Hello",Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                    return viewHolder;
+                }
+            };
+            mRecyclerView.setLayoutManager(mLinearLayoutManager);
+            firebaseRecyclerAdapter.startListening();
+            mRecyclerView.setAdapter(firebaseRecyclerAdapter);
         }
 
         return super.onOptionsItemSelected(item);

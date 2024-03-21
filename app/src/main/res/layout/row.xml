@@ -21,7 +21,7 @@
             android:layout_margin="5dp">
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:id="@+id/rTitleMG"
                 android:hint="Tên Manga"
                 android:textColor="#000000"
