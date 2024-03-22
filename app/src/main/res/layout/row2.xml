@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:orientation="horizontal"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:id="@+id/linear_item"
+        android:layout_width="150dp"
+        android:background="#FFFFFF"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="120dp"
+            android:id="@+id/rImage"
+            android:layout_margin="5dp"
+            android:layout_gravity="center"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:id="@+id/rTitleMG"
+            android:hint="Tên Manga"
+            android:gravity="center"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            android:textSize="16sp"/>
+
+    </LinearLayout>
+    <View
+        android:layout_width="2dp"
+        android:layout_height="180dp"
+        android:background="#000000"/>
+</androidx.cardview.widget.CardView>

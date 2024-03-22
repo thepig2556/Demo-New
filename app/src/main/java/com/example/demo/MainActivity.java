@@ -51,29 +51,56 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    LinearLayoutManager mLinearLayoutManager;
-    RecyclerView mRecyclerView;
+    LinearLayoutManager mLinearLayoutManager, layoutManager;
+    RecyclerView mRecyclerView, mRecyclerView2;
     FirebaseDatabase mFirebaseDatabase;
     DatabaseReference mDatabaseReference;
-    FirebaseRecyclerAdapter<Model,ViewHolder> firebaseRecyclerAdapter;
-    FirebaseRecyclerOptions<Model>options;
+    FirebaseRecyclerAdapter<Model,ViewHolder> firebaseRecyclerAdapter, firebaseRecyclerAdapter2;
+    FirebaseRecyclerOptions<Model>options, options2;
     EditText inputSearch;
     LinearLayout linearItem;
     //
     FirebaseAuth auth;
     FirebaseUser user;
     ImageSlider mainSlider;
+
+    //
+    long maxid = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        layoutManager = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL, false);
+        layoutManager.setReverseLayout(true);
+        layoutManager.setStackFromEnd(true);
+
         mLinearLayoutManager=new LinearLayoutManager(this);
         mLinearLayoutManager.setReverseLayout(true);
         inputSearch=findViewById(R.id.inputSearch);
         mLinearLayoutManager.setStackFromEnd(true);
         mRecyclerView=findViewById(R.id.recyclerView);
+        mRecyclerView2=findViewById(R.id.recyclerView2);
         mFirebaseDatabase=FirebaseDatabase.getInstance();
         mDatabaseReference= mFirebaseDatabase.getReference("Data");
+
+        //
+        mDatabaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists())
+                {
+                    maxid= snapshot.getChildrenCount();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        //
+
         //BANNER AUTOMATIC
         auth = FirebaseAuth.getInstance();
         user = auth.getCurrentUser();
@@ -154,6 +181,7 @@ public class MainActivity extends AppCompatActivity {
     private void showData(String data) {
         Query query = mDatabaseReference.orderByChild("title").startAt(data).endAt(data+"\uf8ff");
         options = new FirebaseRecyclerOptions.Builder<Model>().setQuery(query,Model.class).build();
+        options2 = new FirebaseRecyclerOptions.Builder<Model>().setQuery(mDatabaseReference.limitToLast(5), Model.class).build();
         firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Model, ViewHolder>(options) {
             @Override
             protected void onBindViewHolder(@NonNull ViewHolder holder,final int position, @NonNull Model model) {
@@ -176,6 +204,7 @@ public class MainActivity extends AppCompatActivity {
                 });
             }
 
+
             @NonNull
             @Override
             public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -195,9 +224,56 @@ public class MainActivity extends AppCompatActivity {
                 return viewHolder;
             }
         };
+
+        firebaseRecyclerAdapter2 = new FirebaseRecyclerAdapter<Model, ViewHolder>(options2) {
+            @Override
+            protected void onBindViewHolder(@NonNull ViewHolder holder,final int position, @NonNull Model model) {
+                holder.setDetails2(getApplicationContext(),model.getTitle(), model.getImage());
+//                Click chapter
+                //Set on Click Item List Chapter
+                holder.mview.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent=new Intent( MainActivity.this,ListChapterActivity.class);
+                        Bundle bundle=new Bundle();
+                        bundle.putSerializable("key",model);
+                        intent.putExtras(bundle);
+                        startActivity(intent);
+                        //
+//        dữ iệu ảo list chapter
+                    }
+                });
+            }
+
+
+            @NonNull
+            @Override
+            public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                View itemView= LayoutInflater.from(parent.getContext()).inflate(R.layout.row2,parent,false);
+                ViewHolder viewHolder=new ViewHolder(itemView);
+                viewHolder.setOnClickListener(new ViewHolder.ClickListener() {
+                    @Override
+                    public void onItemClick(View view, int position) {
+                        //               Toast.makeText(MainActivity.this,"Hello",Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onItemLongClick(View view, int position) {
+//                        Toast.makeText(MainActivity.this,"Hello",Toast.LENGTH_SHORT).show();
+                    }
+                });
+                return viewHolder;
+            }
+        };
+
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
         firebaseRecyclerAdapter.startListening();
         mRecyclerView.setAdapter(firebaseRecyclerAdapter);
+
+
+        mRecyclerView2.setLayoutManager(layoutManager);
+        firebaseRecyclerAdapter2.startListening();
+        mRecyclerView2.setAdapter(firebaseRecyclerAdapter2);
     }
 
 
@@ -207,6 +283,10 @@ public class MainActivity extends AppCompatActivity {
         if(firebaseRecyclerAdapter!=null){
 
             firebaseRecyclerAdapter.startListening();
+        }
+        if(firebaseRecyclerAdapter2!=null){
+
+            firebaseRecyclerAdapter2.startListening();
         }
     }
 

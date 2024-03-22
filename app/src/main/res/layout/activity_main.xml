@@ -8,17 +8,17 @@
     tools:context=".MainActivity">
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="280dp"
-        >
+        android:layout_height="280dp">
+
         <com.denzcoskun.imageslider.ImageSlider
+            android:id="@+id/imageSlider"
             android:layout_width="match_parent"
             android:layout_height="260dp"
-            android:id="@+id/imageSlider"
             app:iss_auto_cycle="true"
             app:iss_delay="0"
-            app:iss_period="2000">
-        </com.denzcoskun.imageslider.ImageSlider>
+            app:iss_period="2000"></com.denzcoskun.imageslider.ImageSlider>
     </LinearLayout>
 
     <EditText
@@ -35,12 +35,26 @@
         android:inputType="text"
         />
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@+id/linearLayout"
+        android:text="Mới đăng tải"
+        android:textColor="#FFFFFF"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/recyclerView2"
+        android:layout_marginTop="320dp"></androidx.recyclerview.widget.RecyclerView>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginTop="280dp"></androidx.recyclerview.widget.RecyclerView>
+        android:layout_marginTop="480dp"></androidx.recyclerview.widget.RecyclerView>
 
 </RelativeLayout>
