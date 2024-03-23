@@ -56,12 +56,12 @@ import java.util.Comparator;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    LinearLayoutManager mLinearLayoutManager, layoutManager;
-    RecyclerView mRecyclerView, mRecyclerView2;
+    LinearLayoutManager mLinearLayoutManager, layoutManager, hLayoutManager;
+    RecyclerView mRecyclerView, mRecyclerView2, mRecyclerView3;
     FirebaseDatabase mFirebaseDatabase;
     DatabaseReference mDatabaseReference;
-    FirebaseRecyclerAdapter<Model,ViewHolder> firebaseRecyclerAdapter, firebaseRecyclerAdapter2;
-    FirebaseRecyclerOptions<Model>options, options2;
+    FirebaseRecyclerAdapter<Model,ViewHolder> firebaseRecyclerAdapter, firebaseRecyclerAdapter2, firebaseRecyclerAdapter3;
+    FirebaseRecyclerOptions<Model>options, options2, options3;
     EditText inputSearch;
     LinearLayout linearItem;
     TextView btnShowAll;
@@ -81,6 +81,10 @@ public class MainActivity extends AppCompatActivity {
         layoutManager.setReverseLayout(true);
         layoutManager.setStackFromEnd(true);
 
+        hLayoutManager = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL, false);
+        hLayoutManager.setReverseLayout(true);
+        hLayoutManager.setStackFromEnd(true);
+
         mLinearLayoutManager=new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         mLinearLayoutManager.setReverseLayout(true);
 //        inputSearch=findViewById(R.id.inputSearch);
@@ -96,6 +100,7 @@ public class MainActivity extends AppCompatActivity {
         mLinearLayoutManager.setStackFromEnd(true);
         mRecyclerView=findViewById(R.id.recyclerView);
         mRecyclerView2=findViewById(R.id.recyclerView2);
+        mRecyclerView3=findViewById(R.id.recyclerView3);
         mFirebaseDatabase=FirebaseDatabase.getInstance();
         mDatabaseReference= mFirebaseDatabase.getReference("Data");
 
@@ -184,19 +189,14 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void onMangaClicked(String mangaId){
-        DatabaseReference mangasRef = mDatabaseReference.child("/"+mangaId);
-        TextView txtView = findViewById(R.id.rView);
-        String currentView = txtView.getText().toString();
-        int oldView = (Integer.parseInt(currentView)+1);
-        String newView = Integer.toString(oldView);
-        txtView.setText(newView);
-        mangasRef.child("luotxem").setValue(newView);
+
     }
 
 //public void showData(String data)
     private void showData() {
+        options2 = new FirebaseRecyclerOptions.Builder<Model>().setQuery(mDatabaseReference.limitToLast(7),Model.class).build();
         options = new FirebaseRecyclerOptions.Builder<Model>().setQuery(mDatabaseReference.limitToFirst(7),Model.class).build();
-        options2 = new FirebaseRecyclerOptions.Builder<Model>().setQuery(mDatabaseReference.orderByChild("luotxem").limitToLast(7), Model.class).build();
+        options3 = new FirebaseRecyclerOptions.Builder<Model>().setQuery(mDatabaseReference.orderByChild("luotxem").limitToLast(7), Model.class).build();
         firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Model, ViewHolder>(options) {
             @Override
             protected void onBindViewHolder(@NonNull ViewHolder holder,final int position, @NonNull Model model) {
@@ -209,6 +209,7 @@ public class MainActivity extends AppCompatActivity {
                         Intent intent=new Intent( MainActivity.this,ListChapterActivity.class);
                         Bundle bundle=new Bundle();
                         bundle.putSerializable("key",model);
+                        mDatabaseReference.child(String.valueOf(model.getId())).child("luotxem").setValue(model.getLuotxem()+1);
                         intent.putExtras(bundle);
                         startActivity(intent);
                         //
@@ -249,6 +250,7 @@ public class MainActivity extends AppCompatActivity {
                         Bundle bundle=new Bundle();
                         bundle.putSerializable("key",model);
                         intent.putExtras(bundle);
+                        mDatabaseReference.child(String.valueOf(model.getId())).child("luotxem").setValue(model.getLuotxem()+1);
                         startActivity(intent);
                         //
 //        dữ iệu ảo list chapter
@@ -276,6 +278,53 @@ public class MainActivity extends AppCompatActivity {
                 return viewHolder;
             }
         };
+
+
+
+        firebaseRecyclerAdapter3 = new FirebaseRecyclerAdapter<Model, ViewHolder>(options3) {
+            @Override
+            protected void onBindViewHolder(@NonNull ViewHolder holder,final int position, @NonNull Model model) {
+                holder.setDetails2(getApplicationContext(),model.getTitle(), model.getImage());
+//                Click chapter
+                //Set on Click Item List Chapter
+                holder.mview.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent=new Intent( MainActivity.this,ListChapterActivity.class);
+                        Bundle bundle=new Bundle();
+                        bundle.putSerializable("key",model);
+                        mDatabaseReference.child(String.valueOf(model.getId())).child("luotxem").setValue(model.getLuotxem()+1);
+                        intent.putExtras(bundle);
+                        startActivity(intent);
+                        //
+//        dữ iệu ảo list chapter
+                    }
+                });
+            }
+            @NonNull
+            @Override
+            public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                View itemView= LayoutInflater.from(parent.getContext()).inflate(R.layout.row2,parent,false);
+                ViewHolder viewHolder=new ViewHolder(itemView);
+                viewHolder.setOnClickListener(new ViewHolder.ClickListener() {
+                    @Override
+                    public void onItemClick(View view, int position) {
+                        //               Toast.makeText(MainActivity.this,"Hello",Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onItemLongClick(View view, int position) {
+//                        Toast.makeText(MainActivity.this,"Hello",Toast.LENGTH_SHORT).show();
+                    }
+                });
+                return viewHolder;
+            }
+        };
+        mRecyclerView3.setLayoutManager(hLayoutManager);
+        firebaseRecyclerAdapter3.startListening();
+        mRecyclerView3.setAdapter(firebaseRecyclerAdapter3);
+
+
 
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
         firebaseRecyclerAdapter.startListening();

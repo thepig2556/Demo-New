@@ -10,12 +10,12 @@
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="365dp">
+        android:layout_height="245dp">
 
         <com.denzcoskun.imageslider.ImageSlider
             android:id="@+id/imageSlider"
             android:layout_width="match_parent"
-            android:layout_height="365dp"
+            android:layout_height="wrap_content"
             app:iss_auto_cycle="true"
             app:iss_delay="0"
             app:iss_period="2000"></com.denzcoskun.imageslider.ImageSlider>
@@ -24,14 +24,35 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <TextView
+            android:layout_width="match_parent"
+            android:background="#000000"
+            android:layout_height="35dp"
+            android:layout_below="@+id/linearLayout"
+            android:text="Truyện hot"
+            android:textColor="#00FFFF"
+            android:layout_marginTop="210dp"
+            android:textSize="25sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:id="@+id/recyclerView3"
+        android:layout_marginTop="245dp"></androidx.recyclerview.widget.RecyclerView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
             android:layout_width="wrap_content"
             android:background="#000000"
-            android:layout_height="40dp"
+            android:layout_height="35dp"
             android:layout_below="@+id/linearLayout"
             android:text="Mới đăng tải"
             android:textColor="#00FFFF"
-            android:layout_marginTop="365dp"
-            android:textSize="30sp"
+            android:layout_marginTop="395dp"
+            android:textSize="25sp"
             android:textStyle="bold" />
     </LinearLayout>
 
@@ -39,29 +60,29 @@
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:id="@+id/recyclerView2"
-        android:layout_marginTop="405dp"></androidx.recyclerview.widget.RecyclerView>
+        android:layout_marginTop="430dp"></androidx.recyclerview.widget.RecyclerView>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="555dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="580dp"
         android:orientation="horizontal">
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_height="35dp"
             android:layout_below="@+id/linearLayout"
             android:text="Truyện tranh"
             android:textColor="#ffff00"
             android:background="#000000"
-            android:textSize="30sp"
+            android:textSize="25sp"
             android:textStyle="bold" />
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_height="35dp"
             android:layout_marginLeft="165dp"
             android:id="@+id/btnShowAll"
             android:layout_gravity="right"
-            android:text="Xem tất cả"
+            android:text="Xem tất cả >>"
             android:textSize="15sp"
             android:textColor="#C0C0C0"
             android:textStyle="bold"
@@ -72,7 +93,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:layout_marginTop="595dp"></androidx.recyclerview.widget.RecyclerView>
+        android:layout_height="155dp"
+        android:layout_marginTop="615dp"></androidx.recyclerview.widget.RecyclerView>
 
 </RelativeLayout>

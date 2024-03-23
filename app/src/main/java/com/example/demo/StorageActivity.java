@@ -119,15 +119,6 @@ public class StorageActivity extends AppCompatActivity {
             }
         });
     }
-    //Tăng lượt xem khi nhấn vào
-    public void onMangaClicked(Long mangaId){
-        DatabaseReference mangasRef = mDatabaseReference.child("/"+mangaId);
-        TextView txtView = findViewById(R.id.rView);
-        long oldView = (Long.parseLong(txtView.getText().toString())+1);
-//        String newView = Long.toString(oldView);
-        txtView.setText(Long.toString(oldView));
-        mangasRef.child("luotxem").setValue(oldView);
-    }
 
     //public void showData(String data)
     private void showData(String data) {
@@ -146,8 +137,7 @@ public class StorageActivity extends AppCompatActivity {
                         Bundle bundle=new Bundle();
                         bundle.putSerializable("key",model);
                         intent.putExtras(bundle);
-                        Long s = model.getId();
-                        onMangaClicked(s);
+                        mDatabaseReference.child(String.valueOf(model.getId())).child("luotxem").setValue(model.getLuotxem()+1);
                         startActivity(intent);
                         //
 //        dữ iệu ảo list chapter
@@ -283,8 +273,7 @@ public class StorageActivity extends AppCompatActivity {
                             Bundle bundle=new Bundle();
                             bundle.putSerializable("key",model);
                             intent.putExtras(bundle);
-                            Long s= model.getId();
-                            onMangaClicked(s);
+                            mDatabaseReference.child(String.valueOf(model.getId())).child("luotxem").setValue(model.getLuotxem()+1);
                             startActivity(intent);
                             //
 //        dữ iệu ảo list chapter
@@ -331,8 +320,7 @@ public class StorageActivity extends AppCompatActivity {
                             Bundle bundle=new Bundle();
                             bundle.putSerializable("key",model);
                             intent.putExtras(bundle);
-                            Long s= model.getId();
-                            onMangaClicked(s);
+                            mDatabaseReference.child(String.valueOf(model.getId())).child("luotxem").setValue(model.getLuotxem()+1);
                             startActivity(intent);
                             //
 //        dữ iệu ảo list chapter
@@ -379,8 +367,8 @@ public class StorageActivity extends AppCompatActivity {
                             Bundle bundle=new Bundle();
                             bundle.putSerializable("key",model);
                             intent.putExtras(bundle);
-                            Long s= model.getId();
-                            onMangaClicked(s);
+                            mDatabaseReference.child(String.valueOf(model.getId())).child("luotxem").setValue(model.getLuotxem()+1);
+
                             startActivity(intent);
                             //
 //        dữ iệu ảo list chapter
@@ -427,8 +415,7 @@ public class StorageActivity extends AppCompatActivity {
                             Bundle bundle=new Bundle();
                             bundle.putSerializable("key",model);
                             intent.putExtras(bundle);
-                            Long s= model.getId();
-                            onMangaClicked(s);
+                            mDatabaseReference.child(String.valueOf(model.getId())).child("luotxem").setValue(model.getLuotxem()+1);
                             startActivity(intent);
                             //
 //        dữ iệu ảo list chapter
@@ -475,8 +462,8 @@ public class StorageActivity extends AppCompatActivity {
                             Bundle bundle=new Bundle();
                             bundle.putSerializable("key",model);
                             intent.putExtras(bundle);
-                            Long s= model.getId();
-                            onMangaClicked(s);
+                            mDatabaseReference.child(String.valueOf(model.getId())).child("luotxem").setValue(model.getLuotxem()+1);
+
                             startActivity(intent);
                             //
 //        dữ iệu ảo list chapter
@@ -523,8 +510,8 @@ public class StorageActivity extends AppCompatActivity {
                             Bundle bundle=new Bundle();
                             bundle.putSerializable("key",model);
                             intent.putExtras(bundle);
-                            Long s= model.getId();
-                            onMangaClicked(s);
+                            mDatabaseReference.child(String.valueOf(model.getId())).child("luotxem").setValue(model.getLuotxem()+1);
+
                             startActivity(intent);
                             //
 //        dữ iệu ảo list chapter
@@ -571,8 +558,8 @@ public class StorageActivity extends AppCompatActivity {
                             Bundle bundle=new Bundle();
                             bundle.putSerializable("key",model);
                             intent.putExtras(bundle);
-                            Long s= model.getId();
-                            onMangaClicked(s);
+                            mDatabaseReference.child(String.valueOf(model.getId())).child("luotxem").setValue(model.getLuotxem()+1);
+
                             startActivity(intent);
                             //
 //        dữ iệu ảo list chapter
@@ -619,8 +606,8 @@ public class StorageActivity extends AppCompatActivity {
                             Bundle bundle=new Bundle();
                             bundle.putSerializable("key",model);
                             intent.putExtras(bundle);
-                            Long s= model.getId();
-                            onMangaClicked(s);
+                            mDatabaseReference.child(String.valueOf(model.getId())).child("luotxem").setValue(model.getLuotxem()+1);
+
                             startActivity(intent);
                             //
 //        dữ iệu ảo list chapter
@@ -667,8 +654,8 @@ public class StorageActivity extends AppCompatActivity {
                             Bundle bundle=new Bundle();
                             bundle.putSerializable("key",model);
                             intent.putExtras(bundle);
-                            Long s= model.getId();
-                            onMangaClicked(s);
+                            mDatabaseReference.child(String.valueOf(model.getId())).child("luotxem").setValue(model.getLuotxem()+1);
+
                             startActivity(intent);
                             //
 //        dữ iệu ảo list chapter
@@ -715,8 +702,8 @@ public class StorageActivity extends AppCompatActivity {
                             Bundle bundle=new Bundle();
                             bundle.putSerializable("key",model);
                             intent.putExtras(bundle);
-                            Long s= model.getId();
-                            onMangaClicked(s);
+                            mDatabaseReference.child(String.valueOf(model.getId())).child("luotxem").setValue(model.getLuotxem()+1);
+
                             startActivity(intent);
                             //
 //        dữ iệu ảo list chapter
@@ -763,8 +750,8 @@ public class StorageActivity extends AppCompatActivity {
                             Bundle bundle=new Bundle();
                             bundle.putSerializable("key",model);
                             intent.putExtras(bundle);
-                            Long s= model.getId();
-                            onMangaClicked(s);
+                            mDatabaseReference.child(String.valueOf(model.getId())).child("luotxem").setValue(model.getLuotxem()+1);
+
                             startActivity(intent);
                             //
 //        dữ iệu ảo list chapter
