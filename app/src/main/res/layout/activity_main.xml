@@ -10,31 +10,16 @@
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="280dp">
+        android:layout_height="365dp">
 
         <com.denzcoskun.imageslider.ImageSlider
             android:id="@+id/imageSlider"
             android:layout_width="match_parent"
-            android:layout_height="280dp"
+            android:layout_height="365dp"
             app:iss_auto_cycle="true"
             app:iss_delay="0"
             app:iss_period="2000"></com.denzcoskun.imageslider.ImageSlider>
     </LinearLayout>
-
-<!--    <EditText-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="60dp"-->
-<!--        android:hint="Search manga here..."-->
-<!--        android:gravity="center"-->
-<!--        android:textStyle="bold"-->
-<!--        android:id="@+id/inputSearch"-->
-<!--        android:drawableRight="@drawable/icsearch"-->
-<!--        android:padding="20dp"-->
-<!--        android:layout_marginTop="220dp"-->
-<!--        android:background="@drawable/edit_text_background"-->
-<!--        android:inputType="text"-->
-<!--        />-->
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -44,21 +29,21 @@
             android:layout_below="@+id/linearLayout"
             android:text="Mới đăng tải"
             android:textColor="#00FFFF"
-            android:layout_marginTop="280dp"
+            android:layout_marginTop="365dp"
             android:textSize="30sp"
             android:textStyle="bold" />
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="150dp"
         android:id="@+id/recyclerView2"
-        android:layout_marginTop="320dp"></androidx.recyclerview.widget.RecyclerView>
+        android:layout_marginTop="405dp"></androidx.recyclerview.widget.RecyclerView>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="500dp"
+        android:layout_marginTop="555dp"
         android:orientation="horizontal">
         <TextView
             android:layout_width="wrap_content"
@@ -86,9 +71,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginTop="540dp"></androidx.recyclerview.widget.RecyclerView>
+        android:layout_height="150dp"
+        android:layout_marginTop="595dp"></androidx.recyclerview.widget.RecyclerView>
 
 </RelativeLayout>
