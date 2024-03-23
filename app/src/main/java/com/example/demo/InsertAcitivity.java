@@ -58,6 +58,7 @@ public class InsertAcitivity extends AppCompatActivity implements AdapterView.On
         viewAdd = findViewById(R.id.viewAdd);
         btnAdd = findViewById(R.id.btnAdd);
         btnBack = findViewById(R.id.btnBack);
+        getSupportActionBar().setTitle("Thêm truyện");
 
         dbRef = FirebaseDatabase.getInstance().getReference("Genre Data");
         //load genre

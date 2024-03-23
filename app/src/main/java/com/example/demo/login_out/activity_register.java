@@ -36,6 +36,7 @@ public class activity_register extends AppCompatActivity {
         setContentView(R.layout.activity_register);
         useredit = findViewById(R.id.dangnhap);
         passedit = findViewById(R.id.matkhau);
+        getSupportActionBar().setTitle("Đăng ký");
         repassedit = findViewById(R.id.xacnhanmatkhau);
         tvHA = findViewById(R.id.tvHA);
         btncreate = findViewById(R.id.btncreate);

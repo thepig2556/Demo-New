@@ -44,6 +44,7 @@ public class SecondActivity extends AppCompatActivity {
         setContentView(R.layout.activity_second);
         auth = FirebaseAuth.getInstance();
         btnSignout = findViewById(R.id.btnSignout);
+        getSupportActionBar().setTitle("User");
         btnBack = findViewById(R.id.btnBack);
         btnChangePass = findViewById(R.id.btnChangePassword);
         tvUserEmail = findViewById(R.id.tvUserEmail);

@@ -28,6 +28,7 @@ public class UpdatePasswordActivity extends AppCompatActivity {
         edtNewPass = findViewById(R.id.edtNewPass);
         edtRePass = findViewById(R.id.edtRePass);
         btnUpdate=findViewById(R.id.btnUpdate);
+        getSupportActionBar().setTitle("Đổi mật khẩu");
         btnBack=findViewById(R.id.btnBack);
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override

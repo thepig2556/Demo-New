@@ -41,6 +41,7 @@ public class activity_login extends AppCompatActivity {
         passedit = findViewById(R.id.matkhau);
         btnlogin = findViewById(R.id.btnlogin);
         txtForgotPassword = findViewById(R.id.txtForgotPassword);
+        getSupportActionBar().setTitle("Đăng nhập");
         btnregister = findViewById(R.id.btnregister);
         mAuth = FirebaseAuth.getInstance();
         btnlogin.setOnClickListener(new View.OnClickListener() {

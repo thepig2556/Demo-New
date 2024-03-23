@@ -51,6 +51,7 @@ DatabaseReference mangaDBRef, dbRef;
 
         lvManga = findViewById(R.id.lvManga);
         mangaList = new ArrayList<>();
+        getSupportActionBar().setTitle("Kho truyện");
 
         mangaDBRef = FirebaseDatabase.getInstance().getReference("Data");
 

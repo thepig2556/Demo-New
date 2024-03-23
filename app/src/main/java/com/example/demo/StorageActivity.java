@@ -65,6 +65,7 @@ public class StorageActivity extends AppCompatActivity {
         mLinearLayoutManager.setStackFromEnd(true);
         mRecyclerView=findViewById(R.id.recyclerView);
         mFirebaseDatabase=FirebaseDatabase.getInstance();
+        getSupportActionBar().setTitle("CATEGORY");
         mDatabaseReference= mFirebaseDatabase.getReference("Data");
         auth = FirebaseAuth.getInstance();
         user = auth.getCurrentUser();
@@ -183,6 +184,8 @@ public class StorageActivity extends AppCompatActivity {
         mnu.inflate(R.menu.menu,menu);
         MenuInflater mnu2 = getMenuInflater();
         mnu2.inflate(R.menu.menu_second,menu);
+        MenuInflater mnu3 = getMenuInflater();
+        mnu3.inflate(R.menu.menu_third,menu);
         return super.onCreateOptionsMenu(menu);
     }
 

@@ -33,6 +33,7 @@ public class AddGenreActivity extends AppCompatActivity {
 
         genreAddNew = findViewById(R.id.genreAddNew);
         btnAddNewGenre = findViewById(R.id.btnAddNewGenre);
+        getSupportActionBar().setTitle("Thêm thể loại");
         dbRef= FirebaseDatabase.getInstance().getReference("Genre Data");
         dbRef.addValueEventListener(new ValueEventListener() {
             @Override

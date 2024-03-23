@@ -28,6 +28,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         btnReset = findViewById(R.id.btnReset);
         btnBack = findViewById(R.id.btnBack);
         emailReset = findViewById(R.id.emailRS);
+        getSupportActionBar().setTitle("Quên mật khẩu");
         mAuth = FirebaseAuth.getInstance();
 
         btnReset.setOnClickListener(new View.OnClickListener() {
