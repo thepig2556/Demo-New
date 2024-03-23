@@ -15,39 +15,73 @@
         <com.denzcoskun.imageslider.ImageSlider
             android:id="@+id/imageSlider"
             android:layout_width="match_parent"
-            android:layout_height="260dp"
+            android:layout_height="280dp"
             app:iss_auto_cycle="true"
             app:iss_delay="0"
             app:iss_period="2000"></com.denzcoskun.imageslider.ImageSlider>
     </LinearLayout>
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:hint="Search manga here..."
-        android:gravity="center"
-        android:textStyle="bold"
-        android:id="@+id/inputSearch"
-        android:drawableRight="@drawable/icsearch"
-        android:padding="20dp"
-        android:layout_marginTop="220dp"
-        android:background="@drawable/edit_text_background"
-        android:inputType="text"
-        />
+<!--    <EditText-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="60dp"-->
+<!--        android:hint="Search manga here..."-->
+<!--        android:gravity="center"-->
+<!--        android:textStyle="bold"-->
+<!--        android:id="@+id/inputSearch"-->
+<!--        android:drawableRight="@drawable/icsearch"-->
+<!--        android:padding="20dp"-->
+<!--        android:layout_marginTop="220dp"-->
+<!--        android:background="@drawable/edit_text_background"-->
+<!--        android:inputType="text"-->
+<!--        />-->
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_below="@+id/linearLayout"
-        android:text="Mới đăng tải"
-        android:textColor="#FFFFFF"
-        android:textSize="30sp"
-        android:textStyle="bold" />
+        android:layout_height="match_parent">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@+id/linearLayout"
+            android:text="Mới đăng tải"
+            android:textColor="#00FFFF"
+            android:layout_marginTop="280dp"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/recyclerView2"
         android:layout_marginTop="320dp"></androidx.recyclerview.widget.RecyclerView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="500dp"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_below="@+id/linearLayout"
+            android:text="Truyện tranh"
+            android:textColor="#ffff00"
+            android:background="#000000"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginLeft="165dp"
+            android:id="@+id/btnShowAll"
+            android:layout_gravity="right"
+            android:text="Xem tất cả"
+            android:textSize="15sp"
+            android:textColor="#C0C0C0"
+            android:textStyle="bold"
+            android:gravity="center"
+            />
+    </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
@@ -55,6 +89,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginTop="480dp"></androidx.recyclerview.widget.RecyclerView>
+        android:layout_marginTop="540dp"></androidx.recyclerview.widget.RecyclerView>
 
 </RelativeLayout>
