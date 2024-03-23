@@ -120,14 +120,13 @@ public class StorageActivity extends AppCompatActivity {
         });
     }
     //Tăng lượt xem khi nhấn vào
-    public void onMangaClicked(String mangaId){
+    public void onMangaClicked(Long mangaId){
         DatabaseReference mangasRef = mDatabaseReference.child("/"+mangaId);
         TextView txtView = findViewById(R.id.rView);
-        String currentView = txtView.getText().toString();
-        int oldView = (Integer.parseInt(currentView)+1);
-        String newView = Integer.toString(oldView);
-        txtView.setText(newView);
-        mangasRef.child("luotxem").setValue(newView);
+        long oldView = (Long.parseLong(txtView.getText().toString())+1);
+//        String newView = Long.toString(oldView);
+        txtView.setText(Long.toString(oldView));
+        mangasRef.child("luotxem").setValue(oldView);
     }
 
     //public void showData(String data)
@@ -147,6 +146,8 @@ public class StorageActivity extends AppCompatActivity {
                         Bundle bundle=new Bundle();
                         bundle.putSerializable("key",model);
                         intent.putExtras(bundle);
+                        Long s = model.getId();
+                        onMangaClicked(s);
                         startActivity(intent);
                         //
 //        dữ iệu ảo list chapter
@@ -282,7 +283,7 @@ public class StorageActivity extends AppCompatActivity {
                             Bundle bundle=new Bundle();
                             bundle.putSerializable("key",model);
                             intent.putExtras(bundle);
-                            String s= model.getId();
+                            Long s= model.getId();
                             onMangaClicked(s);
                             startActivity(intent);
                             //
@@ -330,7 +331,7 @@ public class StorageActivity extends AppCompatActivity {
                             Bundle bundle=new Bundle();
                             bundle.putSerializable("key",model);
                             intent.putExtras(bundle);
-                            String s= model.getId();
+                            Long s= model.getId();
                             onMangaClicked(s);
                             startActivity(intent);
                             //
@@ -378,7 +379,7 @@ public class StorageActivity extends AppCompatActivity {
                             Bundle bundle=new Bundle();
                             bundle.putSerializable("key",model);
                             intent.putExtras(bundle);
-                            String s= model.getId();
+                            Long s= model.getId();
                             onMangaClicked(s);
                             startActivity(intent);
                             //
@@ -426,7 +427,7 @@ public class StorageActivity extends AppCompatActivity {
                             Bundle bundle=new Bundle();
                             bundle.putSerializable("key",model);
                             intent.putExtras(bundle);
-                            String s= model.getId();
+                            Long s= model.getId();
                             onMangaClicked(s);
                             startActivity(intent);
                             //
@@ -474,7 +475,7 @@ public class StorageActivity extends AppCompatActivity {
                             Bundle bundle=new Bundle();
                             bundle.putSerializable("key",model);
                             intent.putExtras(bundle);
-                            String s= model.getId();
+                            Long s= model.getId();
                             onMangaClicked(s);
                             startActivity(intent);
                             //
@@ -522,7 +523,7 @@ public class StorageActivity extends AppCompatActivity {
                             Bundle bundle=new Bundle();
                             bundle.putSerializable("key",model);
                             intent.putExtras(bundle);
-                            String s= model.getId();
+                            Long s= model.getId();
                             onMangaClicked(s);
                             startActivity(intent);
                             //
@@ -570,7 +571,7 @@ public class StorageActivity extends AppCompatActivity {
                             Bundle bundle=new Bundle();
                             bundle.putSerializable("key",model);
                             intent.putExtras(bundle);
-                            String s= model.getId();
+                            Long s= model.getId();
                             onMangaClicked(s);
                             startActivity(intent);
                             //
@@ -618,7 +619,7 @@ public class StorageActivity extends AppCompatActivity {
                             Bundle bundle=new Bundle();
                             bundle.putSerializable("key",model);
                             intent.putExtras(bundle);
-                            String s= model.getId();
+                            Long s= model.getId();
                             onMangaClicked(s);
                             startActivity(intent);
                             //
@@ -666,7 +667,7 @@ public class StorageActivity extends AppCompatActivity {
                             Bundle bundle=new Bundle();
                             bundle.putSerializable("key",model);
                             intent.putExtras(bundle);
-                            String s= model.getId();
+                            Long s= model.getId();
                             onMangaClicked(s);
                             startActivity(intent);
                             //
@@ -714,7 +715,7 @@ public class StorageActivity extends AppCompatActivity {
                             Bundle bundle=new Bundle();
                             bundle.putSerializable("key",model);
                             intent.putExtras(bundle);
-                            String s= model.getId();
+                            Long s= model.getId();
                             onMangaClicked(s);
                             startActivity(intent);
                             //
@@ -762,7 +763,7 @@ public class StorageActivity extends AppCompatActivity {
                             Bundle bundle=new Bundle();
                             bundle.putSerializable("key",model);
                             intent.putExtras(bundle);
-                            String s= model.getId();
+                            Long s= model.getId();
                             onMangaClicked(s);
                             startActivity(intent);
                             //

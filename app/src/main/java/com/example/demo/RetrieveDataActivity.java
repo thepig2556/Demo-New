@@ -83,7 +83,7 @@ DatabaseReference mangaDBRef, dbRef;
             }
         });
     }
-    private void showUpdateDialog(String id,String title, String image, String author, String view)
+    private void showUpdateDialog(Long id,String title, String image, String author, Long view)
     {
         AlertDialog.Builder mDialog =new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
@@ -110,7 +110,7 @@ DatabaseReference mangaDBRef, dbRef;
         nameUpdate.setText(title);
         imageUpdate.setText(image);
         authorUpdate.setText(author);
-        viewUpdate.setText(view);
+        viewUpdate.setText(Long.toString(view));
 
         mDialog.show();
         btnUpdate.setOnClickListener(new View.OnClickListener() {
@@ -119,7 +119,7 @@ DatabaseReference mangaDBRef, dbRef;
                     String newName = nameUpdate.getText().toString();
                     String newImage = imageUpdate.getText().toString();
                     String newAuthor = authorUpdate.getText().toString();
-                    String newView = viewUpdate.getText().toString();
+                    Long newView = Long.valueOf(viewUpdate.getText().toString());
                     updateData(id,newName,newImage,newAuthor,newView);
                     mangaDBRef.child("/"+id+"/genre").setValue(spinner.getSelectedItem().toString());
                     Toast.makeText(RetrieveDataActivity.this, "Record Update", Toast.LENGTH_SHORT).show();
@@ -159,8 +159,8 @@ DatabaseReference mangaDBRef, dbRef;
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
-    private void deleteRecord(String id) {
-        DatabaseReference DbRef = FirebaseDatabase.getInstance().getReference("Data").child(id);
+    private void deleteRecord(Long id) {
+        DatabaseReference DbRef = FirebaseDatabase.getInstance().getReference("Data").child(Long.toString(id));
         Task<Void> mTask = DbRef.removeValue();
         mTask.addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
@@ -179,8 +179,8 @@ DatabaseReference mangaDBRef, dbRef;
         });
     }
 
-    private void updateData(String id,String title,String image, String author, String view){
-        DatabaseReference DbRef = FirebaseDatabase.getInstance().getReference("Data").child(id);
+    private void updateData(Long id,String title,String image, String author, Long view){
+        DatabaseReference DbRef = FirebaseDatabase.getInstance().getReference("Data").child(Long.toString(id));
         Model models = new Model(id,title, image,author, view);
 //        model.setGenre(item);
         DbRef.setValue(models);

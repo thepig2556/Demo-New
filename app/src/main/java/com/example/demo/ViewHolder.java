@@ -29,7 +29,7 @@ public class ViewHolder extends RecyclerView.ViewHolder {
             }
         });
     }
-    public void setDetails(Context ctx, String title, String image, String author, String view){
+    public void setDetails(Context ctx, String title, String image, String author, long view){
         TextView mTitle=mview.findViewById(R.id.rTitleMG);
         TextView mAuthor=mview.findViewById(R.id.rNameAuthor);
         ImageView mImage=mview.findViewById(R.id.rImage);
@@ -37,7 +37,7 @@ public class ViewHolder extends RecyclerView.ViewHolder {
         mTitle.setText(title);
         mAuthor.setText(author);
         Picasso.get().load(image).into(mImage);
-        mView.setText(view);
+        mView.setText(Long.toString(view));
     }
 
 

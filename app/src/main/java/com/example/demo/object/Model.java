@@ -3,16 +3,21 @@ package com.example.demo.object;
 import java.io.Serializable;
 
 public class Model implements Serializable {
-    String id;
+    long id;
     String title;
     String image;
     String author;
-    String luotxem;
+    long luotxem;
     String genre;
     public Model() {
     }
 
-    public Model(String id, String title, String image, String author, String luotxem) {
+    public Model(long id,long luotxem) {
+        this.id=id;
+        this.luotxem = luotxem;
+    }
+
+    public Model(long id, String title, String image, String author, long luotxem) {
         this.id=id;
         this.title = title;
         this.image = image;
@@ -28,19 +33,19 @@ public class Model implements Serializable {
         this.genre = genre;
     }
 
-    public String getLuotxem() {
+    public long getLuotxem() {
         return luotxem;
     }
 
-    public void setLuotxem(String luotxem) {
+    public void setLuotxem(long luotxem) {
         this.luotxem = luotxem;
     }
 
-    public String getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(long id) {
         this.id = id;
     }
 

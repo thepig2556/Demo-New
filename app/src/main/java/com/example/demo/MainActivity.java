@@ -20,6 +20,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -49,6 +50,9 @@ import com.google.firebase.database.Transaction;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -89,7 +93,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
         mLinearLayoutManager.setStackFromEnd(true);
         mRecyclerView=findViewById(R.id.recyclerView);
         mRecyclerView2=findViewById(R.id.recyclerView2);
@@ -178,6 +181,8 @@ public class MainActivity extends AppCompatActivity {
 //        });
     }
     //Tăng lượt xem khi nhấn vào
+
+
     public void onMangaClicked(String mangaId){
         DatabaseReference mangasRef = mDatabaseReference.child("/"+mangaId);
         TextView txtView = findViewById(R.id.rView);
@@ -191,7 +196,7 @@ public class MainActivity extends AppCompatActivity {
 //public void showData(String data)
     private void showData() {
         options = new FirebaseRecyclerOptions.Builder<Model>().setQuery(mDatabaseReference.limitToFirst(7),Model.class).build();
-        options2 = new FirebaseRecyclerOptions.Builder<Model>().setQuery(mDatabaseReference.limitToLast(7), Model.class).build();
+        options2 = new FirebaseRecyclerOptions.Builder<Model>().setQuery(mDatabaseReference.orderByChild("luotxem").limitToLast(7), Model.class).build();
         firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Model, ViewHolder>(options) {
             @Override
             protected void onBindViewHolder(@NonNull ViewHolder holder,final int position, @NonNull Model model) {
@@ -211,8 +216,6 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
             }
-
-
             @NonNull
             @Override
             public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -237,7 +240,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             protected void onBindViewHolder(@NonNull ViewHolder holder,final int position, @NonNull Model model) {
                 holder.setDetails2(getApplicationContext(),model.getTitle(), model.getImage());
-//                Click chapter
+                //                Click chapter
                 //Set on Click Item List Chapter
                 holder.mview.setOnClickListener(new View.OnClickListener() {
                     @Override

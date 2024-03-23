@@ -120,12 +120,11 @@ public class InsertAcitivity extends AppCompatActivity implements AdapterView.On
             String name = nameAdd.getText().toString();
             String img = imgAdd.getText().toString();
             String author = authorAdd.getText().toString();
-            String id = String.valueOf(maxid);
-            String view = viewAdd.getText().toString();
+            long id = maxid;
+            long view = Long.parseLong(viewAdd.getText().toString());
             Model manga = new Model(id,name,img,author,view);
-            assert id != null;
             manga.setGenre(spinner.getSelectedItem().toString());
-            mangaDbRef.child(id).setValue(manga);
+            mangaDbRef.child(Long.toString(id)).setValue(manga);
             Toast.makeText(this, "Insert Succesful", Toast.LENGTH_SHORT).show();
             nameAdd.setText("");
             imgAdd.setText("");

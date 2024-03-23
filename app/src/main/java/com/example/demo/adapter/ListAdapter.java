@@ -41,7 +41,7 @@ public class ListAdapter extends ArrayAdapter {
         tvName.setText(manga.getTitle());
         Picasso.get().load(manga.getImage()).into(tvImage);
         tvAuthor.setText(manga.getAuthor());
-        tvView.setText(manga.getLuotxem());
+        tvView.setText(String.valueOf(manga.getLuotxem()));
         tvGenre.setText(manga.getGenre());
         return listItemView;
     }
